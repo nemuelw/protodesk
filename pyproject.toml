@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "proton-desktop"
+version = "0.1.0"
+description = "Cross-platform desktop app for Proton"
+authors = ["Nemuel Wainaina <nemuelwainaina@proton.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyqtwebengine = "^5.15.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
