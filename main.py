@@ -3,9 +3,10 @@ import webbrowser
 
 from PyQt5.QtCore import pyqtSlot, QSize, QUrl, Qt
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
+from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineDownloadItem, QWebEngineView
 from PyQt5.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QMainWindow, QPushButton,
                              QSizePolicy, QVBoxLayout, QWidget)
+from pyqt_toast import Toast
 
 
 class TempPage(QWebEnginePage):
@@ -61,8 +62,22 @@ class ProtonWebView(QWebEngineView):
         if save_path:
             download.setPath(save_path)
             download.accept()
+            download.finished.connect(self.handle_download_finished)
         else:
             download.cancel()
+
+    def handle_download_finished(self):
+        """
+        Check if a download has completed successfully and show a toast notification.
+        """
+        download = self.sender()
+        if download.state() == QWebEngineDownloadItem.DownloadState.DownloadCompleted:
+            toast = Toast('Download completed successfully!', duration=5, parent=self)
+            toast.show()
+        else:
+            error_message = f'Download failed: {download.errorString()}'
+            toast = Toast(error_message, duration=5, parent=self)
+            toast.show()
 
 
 class ProtonDesktopApp(QMainWindow):

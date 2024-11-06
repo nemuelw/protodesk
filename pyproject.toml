@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 pyqtwebengine = "^5.15.7"
+pyqt-toast = "^0.0.15"
 
 
 [tool.poetry.group.dev.dependencies]
