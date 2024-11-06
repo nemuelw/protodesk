@@ -4,8 +4,8 @@ import webbrowser
 from PyQt5.QtCore import pyqtSlot, QSize, QUrl, Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineDownloadItem, QWebEngineView
-from PyQt5.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QMainWindow, QPushButton,
-                             QSizePolicy, QVBoxLayout, QWidget)
+from PyQt5.QtWidgets import (QApplication, QDialog, QFileDialog, QHBoxLayout, QLabel, QMainWindow,
+                             QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 from pyqt_toast import Toast
 
 
@@ -80,6 +80,75 @@ class ProtonWebView(QWebEngineView):
             toast.show()
 
 
+class AboutDialog(QDialog):
+    """
+    Dialog for info on the application: version, description, author, and contact information.
+    """
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle('About Proton Desktop')
+        self.setFixedSize(300, 230)
+        self.setWindowFlags(Qt.Popup)
+
+        # Apply styles to the dialog
+        self.setStyleSheet("""
+            QDialog {
+                background-color: #2D2D2D;
+                border-radius: 10px;
+                padding: 10px;
+            }
+            QLabel {
+                font-family: 'Arial';
+                font-size: 12pt;
+                color: white;
+            }
+            QLabel#title_label {
+                font-size: 14pt;
+                font-weight: bold;
+                color: #0076D1;
+            }
+            QPushButton {
+                font-family: 'Arial';
+                font-size: 12pt;
+                background-color: #0076D1;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 10px;
+                width: 100%;
+            }
+            QPushButton:hover {
+                background-color: #005BB5;
+            }
+        """)
+
+        layout = QVBoxLayout()
+
+        # Title label
+        title_label = QLabel('Proton Desktop')
+        title_label.setObjectName("title_label")  # Assign ID for specific styling
+        title_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(title_label)
+
+        # Info label
+        info_label = QLabel('Version 0.1.0\nUnofficial desktop app for Proton.')
+        info_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(info_label)
+
+        # Developer info label
+        dev_label = QLabel('Author: Nemuel Wainaina\nContact: nemuelwainaina@proton.me')
+        dev_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(dev_label)
+
+        # Create the Ok button that spans the entire width and is located at the bottom
+        ok_button = QPushButton("Ok")
+        ok_button.clicked.connect(self.accept)  # Close dialog on click
+        layout.addWidget(ok_button)
+
+        # Set layout
+        self.setLayout(layout)
+
+
 class ProtonDesktopApp(QMainWindow):
     """
     Main application window for Proton Desktop
@@ -131,7 +200,7 @@ class ProtonDesktopApp(QMainWindow):
         self.add_button('drive', 'Drive', 'assets/drive.svg')
         self.sidebar_layout.addStretch()
         self.add_button('donate', 'Donate', 'assets/donate.svg')
-        self.add_button('about', 'About', 'assets/about.svg')
+        self.add_button('about', 'About', 'assets/about.svg', self.show_about_dialog)
 
         self.main_layout.addWidget(self.sidebar, alignment=Qt.AlignLeft)
 
@@ -158,7 +227,7 @@ class ProtonDesktopApp(QMainWindow):
         btn.setToolTip(tooltip)
 
         btn.clicked.connect(lambda:
-                            self.on_clicked() if on_clicked else self.load_proton_service(service_name))
+                            on_clicked() if on_clicked else self.load_proton_service(service_name))
 
         self.sidebar_layout.addWidget(btn)
 
@@ -171,6 +240,12 @@ class ProtonDesktopApp(QMainWindow):
         """
         destination_url = self.proton_services.get(service_name, 'mail')
         self.web.load(QUrl(destination_url))
+
+    def show_about_dialog(self):
+        """
+        Show the 'About' dialog
+        """
+        AboutDialog(self).show()
 
 
 if __name__ == "__main__":
