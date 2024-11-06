@@ -10,6 +10,9 @@ python = "^3.12"
 pyqtwebengine = "^5.15.7"
 
 
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.1.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
