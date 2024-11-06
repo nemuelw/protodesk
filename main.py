@@ -80,6 +80,74 @@ class ProtonWebView(QWebEngineView):
             toast.show()
 
 
+class DonateDialog(QDialog):
+    """
+    Dialog for donating to the project
+    """
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle('Donate')
+        self.setFixedSize(300, 300)
+        self.setWindowFlags(Qt.Popup)
+
+        self.setStyleSheet("""
+            QDialog {
+                background-color: #2D2D2D;
+                border-radius: 10px;
+            }
+            QLabel {
+                font-family: 'Arial';
+                font-size: 12pt;
+                color: white;
+            }
+            QLabel#title_label {
+                font-size: 16pt;
+                font-weight: bold;
+                color: #0076D1;
+            }
+            QPushButton {
+                font-family: 'Arial';
+                font-size: 12pt;
+                background-color: white;
+                color: #000000;
+                border-radius: 5px;
+            }
+        """)
+
+        layout = QVBoxLayout()
+
+        title_label = QLabel('Donate')
+        title_label.setObjectName("title_label")
+        title_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(title_label)
+
+        info_label = QLabel("Support the development of \nProton Desktop.")
+        info_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(info_label)
+
+        paypal_btn = QPushButton()
+        paypal_btn.setIcon(QIcon('assets/paypal.svg'))
+        paypal_btn.setIconSize(QSize(150, 80))
+        paypal_btn.clicked.connect(self.open_paypal)
+        layout.addWidget(paypal_btn)
+
+        kofi_btn = QPushButton()
+        kofi_btn.setIcon(QIcon('assets/kofi.svg'))
+        kofi_btn.setIconSize(QSize(150, 80))
+        kofi_btn.clicked.connect(self.open_kofi)
+        layout.addWidget(kofi_btn)
+
+        self.setLayout(layout)
+
+    def open_paypal(self):
+        paypal_url = 'https://www.paypal.com/donate/?hosted_button_id=8KU8MDWA86SNJ'
+        webbrowser.open(paypal_url)
+
+    def open_kofi(self):
+        kofi_url = 'https://ko-fi.com/nemuelw'
+        webbrowser.open(kofi_url)
+
+
 class AboutDialog(QDialog):
     """
     Dialog for info on the application: version, description, author, and contact information.
@@ -90,7 +158,6 @@ class AboutDialog(QDialog):
         self.setFixedSize(300, 230)
         self.setWindowFlags(Qt.Popup)
 
-        # Apply styles to the dialog
         self.setStyleSheet("""
             QDialog {
                 background-color: #2D2D2D;
@@ -124,28 +191,23 @@ class AboutDialog(QDialog):
 
         layout = QVBoxLayout()
 
-        # Title label
         title_label = QLabel('Proton Desktop')
-        title_label.setObjectName("title_label")  # Assign ID for specific styling
+        title_label.setObjectName("title_label")
         title_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(title_label)
 
-        # Info label
         info_label = QLabel('Version 0.1.0\nUnofficial desktop app for Proton.')
         info_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(info_label)
 
-        # Developer info label
         dev_label = QLabel('Author: Nemuel Wainaina\nContact: nemuelwainaina@proton.me')
         dev_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(dev_label)
 
-        # Create the Ok button that spans the entire width and is located at the bottom
         ok_button = QPushButton("Ok")
-        ok_button.clicked.connect(self.accept)  # Close dialog on click
+        ok_button.clicked.connect(self.accept)
         layout.addWidget(ok_button)
 
-        # Set layout
         self.setLayout(layout)
 
 
@@ -194,12 +256,12 @@ class ProtonDesktopApp(QMainWindow):
         self.sidebar.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         self.sidebar.setStyleSheet('background-color: #505264;')
 
-        # sidebar buttons: mail, calendar, drive, vpn
+        # sidebar buttons: mail, calendar, drive, donate, about
         self.add_button('mail', 'Mail', 'assets/mail.svg')
         self.add_button('calendar', 'Calendar', 'assets/calendar.svg')
         self.add_button('drive', 'Drive', 'assets/drive.svg')
         self.sidebar_layout.addStretch()
-        self.add_button('donate', 'Donate', 'assets/donate.svg')
+        self.add_button('donate', 'Donate', 'assets/donate.svg', self.show_donate_dialog)
         self.add_button('about', 'About', 'assets/about.svg', self.show_about_dialog)
 
         self.main_layout.addWidget(self.sidebar, alignment=Qt.AlignLeft)
@@ -240,6 +302,12 @@ class ProtonDesktopApp(QMainWindow):
         """
         destination_url = self.proton_services.get(service_name, 'mail')
         self.web.load(QUrl(destination_url))
+
+    def show_donate_dialog(self):
+        """
+        Show the 'Donate' dialog
+        """
+        DonateDialog(self).show()
 
     def show_about_dialog(self):
         """
