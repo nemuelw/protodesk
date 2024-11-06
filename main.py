@@ -4,8 +4,8 @@ import webbrowser
 from PyQt5.QtCore import pyqtSlot, QSize, QUrl, Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
-from PyQt5.QtWidgets import (QApplication, QHBoxLayout, QMainWindow, QPushButton, QSizePolicy,
-                             QVBoxLayout, QWidget)
+from PyQt5.QtWidgets import (QApplication, QFileDialog, QHBoxLayout, QMainWindow, QPushButton,
+                             QSizePolicy, QVBoxLayout, QWidget)
 
 
 class TempPage(QWebEnginePage):
@@ -46,9 +46,23 @@ class ProtonWebView(QWebEngineView):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setPage(ProtonWebPage(self))
+        profile = self.page().profile()
+        profile.downloadRequested.connect(self.handle_download)
 
         # load initial page: Proton Mail
         self.page().setUrl(QUrl('https://mail.proton.me'))
+
+    def handle_download(self, download):
+        """
+        Handle a file download request
+        """
+        suggested_filename = download.suggestedFileName()
+        save_path, _ = QFileDialog.getSaveFileName(self, 'Save File', suggested_filename)
+        if save_path:
+            download.setPath(save_path)
+            download.accept()
+        else:
+            download.cancel()
 
 
 class ProtonDesktopApp(QMainWindow):
