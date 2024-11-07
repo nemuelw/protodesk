@@ -1,3 +1,4 @@
+import os
 import sys
 import webbrowser
 
@@ -7,6 +8,13 @@ from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineDownloadItem, QWe
 from PyQt5.QtWidgets import (QApplication, QDialog, QFileDialog, QHBoxLayout, QLabel, QMainWindow,
                              QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 from pyqt_toast import Toast
+
+
+def asset_path(asset_name):
+    """
+    Construct correct path for the asset file
+    """
+    return os.path.join(os.path.dirname(__file__), "assets", asset_name)
 
 
 class TempPage(QWebEnginePage):
@@ -126,13 +134,13 @@ class DonateDialog(QDialog):
         layout.addWidget(info_label)
 
         paypal_btn = QPushButton()
-        paypal_btn.setIcon(QIcon('assets/paypal.svg'))
+        paypal_btn.setIcon(QIcon(asset_path('paypal.svg')))
         paypal_btn.setIconSize(QSize(150, 80))
         paypal_btn.clicked.connect(self.open_paypal)
         layout.addWidget(paypal_btn)
 
         kofi_btn = QPushButton()
-        kofi_btn.setIcon(QIcon('assets/kofi.svg'))
+        kofi_btn.setIcon(QIcon(asset_path('kofi.svg')))
         kofi_btn.setIconSize(QSize(150, 80))
         kofi_btn.clicked.connect(self.open_kofi)
         layout.addWidget(kofi_btn)
@@ -257,12 +265,12 @@ class ProtonDesktopApp(QMainWindow):
         self.sidebar.setStyleSheet('background-color: #505264;')
 
         # sidebar buttons: mail, calendar, drive, donate, about
-        self.add_button('mail', 'Mail', 'assets/mail.svg')
-        self.add_button('calendar', 'Calendar', 'assets/calendar.svg')
-        self.add_button('drive', 'Drive', 'assets/drive.svg')
+        self.add_button('mail', 'Mail', 'mail.svg')
+        self.add_button('calendar', 'Calendar', 'calendar.svg')
+        self.add_button('drive', 'Drive', 'drive.svg')
         self.sidebar_layout.addStretch()
-        self.add_button('donate', 'Donate', 'assets/donate.svg', self.show_donate_dialog)
-        self.add_button('about', 'About', 'assets/about.svg', self.show_about_dialog)
+        self.add_button('donate', 'Donate', 'donate.svg', self.show_donate_dialog)
+        self.add_button('about', 'About', 'about.svg', self.show_about_dialog)
 
         self.main_layout.addWidget(self.sidebar, alignment=Qt.AlignLeft)
 
@@ -283,7 +291,7 @@ class ProtonDesktopApp(QMainWindow):
             on_clicked (function): An optional callback function to be executed when the button is clicked.
         """
         btn = QPushButton(self)
-        btn.setIcon(QIcon(icon_path))
+        btn.setIcon(QIcon(asset_path(icon_path)))
         btn.setIconSize(QSize(32, 32))
         btn.setStyleSheet("border: none; margin: 2px;")
         btn.setToolTip(tooltip)
@@ -318,6 +326,7 @@ class ProtonDesktopApp(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(asset_path('logo.ico')))
     window = ProtonDesktopApp()
     window.show()
     sys.exit(app.exec_())
