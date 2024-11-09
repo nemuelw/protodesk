@@ -23,3 +23,17 @@ service and only fully available to premium users beyond the 14-day trial period
 
 Contributions are much welcome! Feel free to open an issue or create a pull request.
 
+## Donations
+
+If you like the idea behind the project and would like to financially support its continued development 
+and maintenance, you are welcome to do so using any of these channels:
+
+<p align="center">
+    <a href="https://www.paypal.com/donate/?hosted_button_id=8KU8MDWA86SNJ">
+        <img alt="Paypal" src="./assets/paypal.svg" width="170">
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://ko-fi.com/nemuelw">
+        <img alt="Ko-fi" src="https://ko-fi.com/img/githubbutton_sm.svg" width="350">
+    </a>
+</p>
