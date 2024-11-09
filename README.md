@@ -1,3 +1,3 @@
 # Proton Desktop
 
-Cross-platform desktop app for Proton
+Unofficial desktop app for Proton
