@@ -19,6 +19,11 @@ service and only fully available to premium users beyond the 14-day trial period
 - access the 3 core Proton services (Mail, Calendar, and Drive) without having to visit the websites on
   their browsers.
 
+## Distribution
+
+Notably, **Proton Desktop** is only available for Linux distributions, and there are *currently* no plans
+to make it available for other platforms.
+
 ## Contributions
 
 Contributions are much welcome! Feel free to open an issue or create a pull request.
