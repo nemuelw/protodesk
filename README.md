@@ -23,6 +23,12 @@ service and only fully available to premium users beyond the 14-day trial period
 
 Contributions are much welcome! Feel free to open an issue or create a pull request.
 
+To create a pull request:
+1. Fork this repository and clone it to your local machine.
+2. Create a new branch for your changes (features, bug fixes, etc.)
+3. Make your changes and commit them with [a clear commit message](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/).
+4. Open a pull request with a detailed description of your changes.
+
 ## Donations
 
 If you like the idea behind the project and would like to financially support its continued development 
