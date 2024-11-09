@@ -6,8 +6,7 @@ from PyQt5.QtCore import pyqtSlot, QSize, QUrl, Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineDownloadItem, QWebEngineView
 from PyQt5.QtWidgets import (QApplication, QDialog, QFileDialog, QHBoxLayout, QLabel, QMainWindow,
-                             QPushButton, QSizePolicy, QVBoxLayout, QWidget)
-from pyqt_toast import Toast
+                             QPushButton, QSizePolicy, QSystemTrayIcon, QVBoxLayout, QWidget)
 
 
 def asset_path(asset_name):
@@ -15,6 +14,16 @@ def asset_path(asset_name):
     Construct correct path for the asset file
     """
     return os.path.join(os.path.dirname(__file__), "assets", asset_name)
+
+
+def show_notification(title, msg):
+    """
+    Show custom notification in the system tray
+    """
+    tray_icon = QSystemTrayIcon(QIcon(asset_path('logo.ico')), parent=app)
+    tray_icon.show()
+    tray_icon.showMessage(
+        title, "Your file has been successfully downloaded.", QSystemTrayIcon.Information, 5000)
 
 
 class TempPage(QWebEnginePage):
@@ -76,16 +85,13 @@ class ProtonWebView(QWebEngineView):
 
     def handle_download_finished(self):
         """
-        Check if a download has completed successfully and show a toast notification.
+        Check if a download has completed successfully and show a notification.
         """
         download = self.sender()
         if download.state() == QWebEngineDownloadItem.DownloadState.DownloadCompleted:
-            toast = Toast('Download completed successfully!', duration=5, parent=self)
-            toast.show()
+            show_notification('Download Complete', 'File has been downloaded successfully')
         else:
-            error_message = f'Download failed: {download.errorString()}'
-            toast = Toast(error_message, duration=5, parent=self)
-            toast.show()
+            show_notification('Download Failed', download.errorString())
 
 
 class DonateDialog(QDialog):

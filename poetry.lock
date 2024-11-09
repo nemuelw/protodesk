@@ -146,35 +146,6 @@ packaging = ">=22.0"
 setuptools = ">=42.0.0"
 
 [[package]]
-name = "pyqt-resource-helper"
-version = "0.0.14"
-description = "Setting icons, stylesheets of imported packages based on main module to prevent FileNotFoundError"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pyqt-resource-helper-0.0.14.tar.gz", hash = "sha256:7b64720296bbc49bee9bc913892ad3ef4343e20978c45f7498b33060567127a5"},
-    {file = "pyqt_resource_helper-0.0.14-py3-none-any.whl", hash = "sha256:e846b0125f0356d05d44555f8553ac42b11bcbbb010e1df6adf06b0406a54091"},
-]
-
-[package.dependencies]
-PyQt5 = ">=5.8"
-
-[[package]]
-name = "pyqt-toast"
-version = "0.0.15"
-description = "PyQt Toast (Small message displayed on the screen, visible for a short time)"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pyqt-toast-0.0.15.tar.gz", hash = "sha256:d9464420f1c550ed7340c866b57093cb2521ea1493077ac1db705a63fedc9600"},
-    {file = "pyqt_toast-0.0.15-py3-none-any.whl", hash = "sha256:01f7fcff1acb3924d11cafa18e870248580e3748c8e2f6abf523adb95c266962"},
-]
-
-[package.dependencies]
-pyqt-resource-helper = ">=0.0.1"
-PyQt5 = ">=5.8"
-
-[[package]]
 name = "pyqt5"
 version = "5.15.11"
 description = "Python bindings for the Qt cross platform application toolkit"
@@ -301,4 +272,4 @@ type = ["importlib-metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (==1.12
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "80a1fde20ac5fb4db0d45af9a716255179708bc61dfbc9a9896b6e8c0dc43463"
+content-hash = "ff57508e9027fbb6e05b0bcb78579e3571331360cec09e6d751ac9c7e244e1f9"
