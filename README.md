@@ -37,3 +37,8 @@ and maintenance, you are welcome to do so using any of these channels:
         <img alt="Ko-fi" src="https://ko-fi.com/img/githubbutton_sm.svg" width="350">
     </a>
 </p>
+
+## Developers & Maintainers
+
+1. Nemuel Wainaina
+   - **Email**: [nemuelwainaina@proton.me](mailto:nemuelwainaina@proton.me)
