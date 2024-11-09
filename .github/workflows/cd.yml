@@ -1,0 +1,41 @@
+name: Continuous Deployment
+
+on:
+    release:
+        types: [created]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v3
+
+          - name: Set up python
+            uses: actions/setup-python@v4
+            with:
+              python-version: '3.12'
+        
+          - name: Install Poetry
+            run: |
+              curl -sSL https://install.python-poetry.org | python3 -
+        
+          - name: Install dependencies
+            run: |
+                poetry install
+
+          - name: Run Pyinstaller
+            run: |
+              poetry run pyinstaller app.spec
+
+          - name: Create a versioned archive of the build
+            run: |
+              tar -czf proton-desktop-${{ github.event.release.tag_name }}.tar.gz dist/
+
+          - name: Upload release asset
+            uses: actions/upload-release-asset@v1
+            with:
+              upload_url: ${{ github.event.release.upload_url}}
+              asset_path: ./proton-desktop-${{ github.event.release.tag_name }}.tar.gz
+              asset_name: proton-desktop-${{ github.event.release.tag_name }}.tar.gz
+              asset_content_type: application/gzip

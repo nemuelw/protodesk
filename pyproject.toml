@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "proton-desktop"
 version = "0.1.0"
-description = "Cross-platform desktop app for Proton"
+description = "Unofficial desktop app for Proton"
 authors = ["Nemuel Wainaina <nemuelwainaina@proton.me>"]
 readme = "README.md"
 
