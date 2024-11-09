@@ -1,3 +1,7 @@
-# Proton Desktop
+<p align="center">
+  <img src="./assets/logo.png" alt="Logo" width="200" height="200"/>
+</p>
 
-Unofficial desktop app for Proton
+<h1 align="center">Proton Desktop</h1>
+
+<p align="center">Unofficial desktop app for Proton</p>
