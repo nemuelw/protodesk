@@ -30,7 +30,7 @@ jobs:
 
           - name: Create a versioned archive of the build
             run: |
-              tar -czf proton-desktop-${{ github.event.release.tag_name }}.tar.gz dist/app/
+              cd dist && tar -czf proton-desktop-${{ github.event.release.tag_name }}.tar.gz app/
 
           - name: Upload release asset
             uses: actions/upload-release-asset@v1
