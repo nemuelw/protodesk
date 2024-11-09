@@ -2,3 +2,6 @@
 __pycache__/
 build/
 dist/
+
+.flatpak-builder/
+build-dir/
