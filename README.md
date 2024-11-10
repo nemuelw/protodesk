@@ -6,6 +6,10 @@
 
 <p align="center">Unofficial desktop app for Proton</p>
 
+<p align="center">
+  <img src="./scrshots/showcase.gif" alt="Screenshots" />
+</p>
+
 ## About
 
 **Proton Desktop** is a free open-source desktop app for Proton. It brings together Proton Mail, Proton 
