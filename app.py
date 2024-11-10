@@ -210,7 +210,7 @@ class AboutDialog(QDialog):
         title_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(title_label)
 
-        info_label = QLabel('Version 0.1.4\nUnofficial desktop app for Proton.')
+        info_label = QLabel('Version 1.0.0\nUnofficial desktop app for Proton.')
         info_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(info_label)
 
