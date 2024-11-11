@@ -30,7 +30,7 @@ jobs:
 
           - name: Create a versioned archive of the build
             run: |
-              cd dist && tar -czf proton-desktop-${{ github.event.release.tag_name }}.tar.gz app/
+              cd dist && tar -czf protodesk-${{ github.event.release.tag_name }}.tar.gz app/
 
           - name: Upload release asset
             uses: actions/upload-release-asset@v1
@@ -38,6 +38,6 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               upload_url: ${{ github.event.release.upload_url}}
-              asset_path: dist/proton-desktop-${{ github.event.release.tag_name }}.tar.gz
-              asset_name: proton-desktop-${{ github.event.release.tag_name }}.tar.gz
+              asset_path: dist/protodesk-${{ github.event.release.tag_name }}.tar.gz
+              asset_name: protodesk-${{ github.event.release.tag_name }}.tar.gz
               asset_content_type: application/gzip

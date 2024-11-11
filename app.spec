@@ -21,7 +21,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='proton-desktop',
+    name='protodesk',
     icon='assets/logo.png',
     debug=False,
     bootloader_ignore_signals=False,

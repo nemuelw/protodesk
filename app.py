@@ -59,7 +59,7 @@ class ProtonWebPage(QWebEnginePage):
 
 class ProtonWebView(QWebEngineView):
     """
-    Custom QWebEngineView for Proton Desktop
+    Custom QWebEngineView for Protodesk
     """
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -135,7 +135,7 @@ class DonateDialog(QDialog):
         title_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(title_label)
 
-        info_label = QLabel("Support the development of \nProton Desktop.")
+        info_label = QLabel("Support the development of \nProtodesk.")
         info_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(info_label)
 
@@ -168,7 +168,7 @@ class AboutDialog(QDialog):
     """
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle('About Proton Desktop')
+        self.setWindowTitle('About Protodesk')
         self.setFixedSize(300, 230)
         self.setWindowFlags(Qt.Popup)
 
@@ -205,7 +205,7 @@ class AboutDialog(QDialog):
 
         layout = QVBoxLayout()
 
-        title_label = QLabel('Proton Desktop')
+        title_label = QLabel('Protodesk')
         title_label.setObjectName("title_label")
         title_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(title_label)
@@ -227,7 +227,7 @@ class AboutDialog(QDialog):
 
 class ProtonDesktopApp(QMainWindow):
     """
-    Main application window for Proton Desktop
+    Main application window for Protodesk
     """
     def __init__(self):
         super().__init__()
@@ -238,7 +238,7 @@ class ProtonDesktopApp(QMainWindow):
             'drive': 'https://drive.proton.me'
         }
 
-        self.setWindowTitle('Proton Desktop')
+        self.setWindowTitle('Protodesk')
 
         # window size and position
         screen_geometry = QApplication.desktop().availableGeometry()
