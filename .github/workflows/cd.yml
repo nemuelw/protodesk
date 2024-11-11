@@ -7,30 +7,27 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            arch: [amd64, arm64]
         steps:
           - name: Checkout repository
             uses: actions/checkout@v3
 
-          - name: Set up python
-            uses: actions/setup-python@v4
-            with:
-              python-version: '3.12'
-        
-          - name: Install Poetry
-            run: |
-              curl -sSL https://install.python-poetry.org | python3 -
-        
-          - name: Install dependencies
-            run: |
-              poetry install
+          - name: Set up Docker Buildx
+            uses: docker/setup-buildx-action@v2
 
-          - name: Run Pyinstaller
+          - name: Build Docker image
             run: |
-              poetry run pyinstaller app.spec
+              docker build --platform linux/${{ matrix.arch }} -t protodesk .
+
+          - name: Run Docker image
+            run: |
+              docker run --rm -v $(pwd)/dist:/app/dist --name protodesk-container protodesk
 
           - name: Create a versioned archive of the build
             run: |
-              cd dist && tar -czf protodesk-${{ github.event.release.tag_name }}.tar.gz app/
+              cd dist && tar -czf protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz app/
 
           - name: Upload release asset
             uses: actions/upload-release-asset@v1
@@ -38,6 +35,6 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               upload_url: ${{ github.event.release.upload_url}}
-              asset_path: dist/protodesk-${{ github.event.release.tag_name }}.tar.gz
-              asset_name: protodesk-${{ github.event.release.tag_name }}.tar.gz
+              asset_path: dist/protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz
+              asset_name: protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz
               asset_content_type: application/gzip
