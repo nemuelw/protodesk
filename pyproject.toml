@@ -7,12 +7,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.14"
-pyqt5 = "5.15.2"
-pyqtwebengine = "5.15.2"
+pyside6 = "^6.8.0.2"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.1.1"
-pyinstaller = "^6.11.0"
+pyinstaller = "^6.11.1"
 
 [build-system]
 requires = ["poetry-core"]

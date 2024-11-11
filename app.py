@@ -2,11 +2,12 @@ import os
 import sys
 import webbrowser
 
-from PyQt5.QtCore import pyqtSlot, QSize, QUrl, Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineDownloadItem, QWebEngineView
-from PyQt5.QtWidgets import (QApplication, QDialog, QFileDialog, QHBoxLayout, QLabel, QMainWindow,
-                             QPushButton, QSizePolicy, QSystemTrayIcon, QVBoxLayout, QWidget)
+from PySide6.QtCore import Slot, QSize, QUrl, Qt, QTimer
+from PySide6.QtGui import QIcon, QGuiApplication
+from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineDownloadRequest
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtWidgets import (QApplication, QDialog, QFileDialog, QHBoxLayout, QLabel, QMainWindow,
+                               QPushButton, QSizePolicy, QSystemTrayIcon, QVBoxLayout, QWidget)
 
 
 def asset_path(asset_name):
@@ -37,7 +38,7 @@ class TempPage(QWebEnginePage):
         self.allowlist = [
             'mail.proton.me', 'calendar.proton.me', 'drive.proton.me', 'account.proton.me']
 
-    @pyqtSlot(QUrl)
+    @Slot(QUrl)
     def handle_url_changed(self, url: QUrl):
         if url.host() not in self.allowlist:
             webbrowser.open(url.toString())
@@ -70,28 +71,30 @@ class ProtonWebView(QWebEngineView):
         # load initial page: Proton Mail
         self.page().setUrl(QUrl('https://mail.proton.me'))
 
-    def handle_download(self, download):
+    def handle_download(self, download: QWebEngineDownloadRequest):
         """
         Handle a file download request
         """
-        suggested_filename = download.suggestedFileName()
+        suggested_filename = download.downloadFileName()
         save_path, _ = QFileDialog.getSaveFileName(self, 'Save File', suggested_filename)
         if save_path:
-            download.setPath(save_path)
+            download.setDownloadDirectory(os.path.dirname(save_path))
             download.accept()
-            download.finished.connect(self.handle_download_finished)
+            self.check_download_status(download)
         else:
             download.cancel()
 
-    def handle_download_finished(self):
+    def check_download_status(self, download: QWebEngineDownloadRequest):
         """
-        Check if a download has completed successfully and show a notification.
+        Periodically check if a download is finished and show a notification if it is.
         """
-        download = self.sender()
-        if download.state() == QWebEngineDownloadItem.DownloadState.DownloadCompleted:
-            show_notification('Download Complete', 'File has been downloaded successfully')
+        if download.isFinished():
+            if download.state() == QWebEngineDownloadRequest.DownloadState.DownloadCompleted:
+                show_notification('Download Complete', 'File has been downloaded successfully')
+            else:
+                show_notification('Download Failed', download.errorString())
         else:
-            show_notification('Download Failed', download.errorString())
+            QTimer.singleShot(500, lambda: self.check_download_status(download))
 
 
 class DonateDialog(QDialog):
@@ -241,7 +244,7 @@ class ProtonDesktopApp(QMainWindow):
         self.setWindowTitle('Protodesk')
 
         # window size and position
-        screen_geometry = QApplication.desktop().availableGeometry()
+        screen_geometry = QGuiApplication.primaryScreen().availableGeometry()
         screen_width, screen_height = screen_geometry.width(), screen_geometry.width()
         self.setGeometry(0, 0, screen_width, screen_height)
 
@@ -335,4 +338,4 @@ if __name__ == "__main__":
     app.setWindowIcon(QIcon(asset_path('logo.ico')))
     window = ProtonDesktopApp()
     window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

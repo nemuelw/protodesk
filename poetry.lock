@@ -146,69 +146,55 @@ packaging = ">=22.0"
 setuptools = ">=42.0.0"
 
 [[package]]
-name = "pyqt5"
-version = "5.15.2"
-description = "Python bindings for the Qt cross platform application toolkit"
+name = "pyside6"
+version = "6.8.0.2"
+description = "Python bindings for the Qt cross-platform application and UI framework"
 optional = false
-python-versions = ">=3.5"
+python-versions = "<3.14,>=3.9"
 files = [
-    {file = "PyQt5-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-abi3-macosx_10_13_intel.whl", hash = "sha256:894ca4ae767a8d6cf5903784b71f755073c78cb8c167eecf6e4ed6b3b055ac6a"},
-    {file = "PyQt5-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:29889845688a54d62820585ad5b2e0200a36b304ff3d7a555e95599f110ba4ce"},
-    {file = "PyQt5-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-none-win32.whl", hash = "sha256:ea24f24b7679bf393dd2e4f53fe0ce65021be18304c1ff7a226c2fc5c356d0da"},
-    {file = "PyQt5-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-none-win_amd64.whl", hash = "sha256:faaecb76ec65e12673a968e7f5bc02495957e6996f0a3fa0d98895f9e4113746"},
-    {file = "PyQt5-5.15.2.tar.gz", hash = "sha256:372b08dc9321d1201e4690182697c5e7ffb2e0770e6b4a45519025134b12e4fc"},
+    {file = "PySide6-6.8.0.2-cp39-abi3-macosx_12_0_universal2.whl", hash = "sha256:cecc6ce1da6cb04542ff5a0887734f63e6ecf54258d1786285b9c7904abd9b01"},
+    {file = "PySide6-6.8.0.2-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:3258f3c63dc5053b8d5b8d2588caca8bb3a36e2f74413511e4676df0e73b6f1e"},
+    {file = "PySide6-6.8.0.2-cp39-abi3-manylinux_2_31_aarch64.whl", hash = "sha256:6a25cf784f978fa2a23b4d089970b27ebe14d26adcaf38b2819cb04483de4ce9"},
+    {file = "PySide6-6.8.0.2-cp39-abi3-win_amd64.whl", hash = "sha256:3e8fffca9a934e30c07c3f34bb572f84bfcf02385acbc715e65fbdd9746ecc2b"},
 ]
 
 [package.dependencies]
-PyQt5-sip = ">=12.8,<13"
+PySide6-Addons = "6.8.0.2"
+PySide6-Essentials = "6.8.0.2"
+shiboken6 = "6.8.0.2"
 
 [[package]]
-name = "pyqt5-sip"
-version = "12.15.0"
-description = "The sip module support for PyQt5"
+name = "pyside6-addons"
+version = "6.8.0.2"
+description = "Python bindings for the Qt cross-platform application and UI framework (Addons)"
 optional = false
-python-versions = ">=3.8"
+python-versions = "<3.14,>=3.9"
 files = [
-    {file = "PyQt5_sip-12.15.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:749f7a3ffd6e3d2d5db65ed92c95cbd14490631595c61f0c0672c9238bfb17de"},
-    {file = "PyQt5_sip-12.15.0-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:b4adc529fa4ec05728e14ea55194d907cc51f18d6f2ac5cc9f6eb52ac038aa0f"},
-    {file = "PyQt5_sip-12.15.0-cp310-cp310-win32.whl", hash = "sha256:83d247cdc43ef224410b14c97413067ea26356dfa39e9ed0fe702a31e25710b0"},
-    {file = "PyQt5_sip-12.15.0-cp310-cp310-win_amd64.whl", hash = "sha256:13f0c6a78e781255863e3e160304648efaf62276b7102741af637b63a6e96930"},
-    {file = "PyQt5_sip-12.15.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:855563d4d3b59ce7438bbf2dd32fed2707787defa40f3efe94f204a19ef92b25"},
-    {file = "PyQt5_sip-12.15.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:0b718a362f4392430903bbb2a4b9bbff9841a16a52f0cfdd5b5bbd9d11457980"},
-    {file = "PyQt5_sip-12.15.0-cp311-cp311-win32.whl", hash = "sha256:2575f428de584a12009fd29d00c89df16ed101a3b38beba818dfdcbc4a10709c"},
-    {file = "PyQt5_sip-12.15.0-cp311-cp311-win_amd64.whl", hash = "sha256:c85be433fbafcb3d417581c0e1b67c8198d23858166e4f938e971c2262c13cdb"},
-    {file = "PyQt5_sip-12.15.0-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:852b75cf208825602480e95ab63314108f872d0da251e9ad3deaaff5a183a6f5"},
-    {file = "PyQt5_sip-12.15.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:0cd21c3215e3c47fdd5fa7a2dc3dd1e07a7230b0626e905a7217925068c788b9"},
-    {file = "PyQt5_sip-12.15.0-cp312-cp312-win32.whl", hash = "sha256:b58eeedc9b2a3037b136bf96915196c391a33be470ed1c0723d7163ef0b727a2"},
-    {file = "PyQt5_sip-12.15.0-cp312-cp312-win_amd64.whl", hash = "sha256:24a1d4937332bf0a38dd95bb2ce4d89723df449f6e912b52ef0e107e11fefac1"},
-    {file = "PyQt5_sip-12.15.0-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:91b9538458a3a23e033c213bc879ce64f3d0a33d5a49cbd03e1e584efe307a35"},
-    {file = "PyQt5_sip-12.15.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:0c1c727ede7fdc464a1fe2e46109ba836509b2d7187a46fdeae443148ce51d1c"},
-    {file = "PyQt5_sip-12.15.0-cp38-cp38-win32.whl", hash = "sha256:dd241de9c569c07bbba62bff1049996e5b52478164f61f430073a87bf6d26d33"},
-    {file = "PyQt5_sip-12.15.0-cp38-cp38-win_amd64.whl", hash = "sha256:f600ae6f03e4bff91153c0dc7ebe52f90bd2b6afda58fd580e6990b3b951adc0"},
-    {file = "PyQt5_sip-12.15.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:c0c543d604116af26694a8a5ba90f510551ff9124d503ae5ee14bb73a61363a3"},
-    {file = "PyQt5_sip-12.15.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:97f2d6e8d9b7b3d3e795d576d7f56e6257f524221f6383b33ded7287763e9f06"},
-    {file = "PyQt5_sip-12.15.0-cp39-cp39-win32.whl", hash = "sha256:ed5221c6241981bd98d39504823efb9cbe36841bf8917288f8fe8fc1d5569a41"},
-    {file = "PyQt5_sip-12.15.0-cp39-cp39-win_amd64.whl", hash = "sha256:7f88c85702dce80ac2e1a162054f688ed394811d6dd03a5574b3fa8111b0a6db"},
-    {file = "PyQt5_sip-12.15.0.tar.gz", hash = "sha256:d23fdfcf363b5cedd9d39f8a9c5710e7d52804f5b08a58e91c638b36eafcb702"},
-]
-
-[[package]]
-name = "pyqtwebengine"
-version = "5.15.2"
-description = "Python bindings for the Qt WebEngine framework"
-optional = false
-python-versions = ">=3.5"
-files = [
-    {file = "PyQtWebEngine-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-abi3-macosx_10_13_intel.whl", hash = "sha256:e9f4a09cce6d8ab8b6c7e7a11e21f606ae713ff275c749839aa4d871a799fccc"},
-    {file = "PyQtWebEngine-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:db99bdf6c01c84bcc7369b0c49702e40451bc48372d4281777e17dbb84874c1a"},
-    {file = "PyQtWebEngine-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-none-win32.whl", hash = "sha256:fe5a02d4cf2327b6a930f8146589842b7664ac703cfddf1f83172423a32e3164"},
-    {file = "PyQtWebEngine-5.15.2-5.15.2-cp35.cp36.cp37.cp38.cp39-none-win_amd64.whl", hash = "sha256:8ba247d0873bbeaee70f273cafbfa985a93947b2b8df23059607ec3595fee128"},
-    {file = "PyQtWebEngine-5.15.2.tar.gz", hash = "sha256:4d72fea774071ce6f76e341a3d2c5d595886c9906a9b9493239c841cce54a634"},
+    {file = "PySide6_Addons-6.8.0.2-cp39-abi3-macosx_12_0_universal2.whl", hash = "sha256:30c9ca570dd18ffbfd34ee95e0a319c34313a80425c4011d6ccc9f4cca0dc4c8"},
+    {file = "PySide6_Addons-6.8.0.2-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:754a9822ab2dc313f9998edef69d8a12bc9fd61727543f8d30806ed272ae1e52"},
+    {file = "PySide6_Addons-6.8.0.2-cp39-abi3-manylinux_2_31_aarch64.whl", hash = "sha256:553f3fa412f423929b5cd8b7d43fd5f02161851f10a438174a198b0f1a044df7"},
+    {file = "PySide6_Addons-6.8.0.2-cp39-abi3-win_amd64.whl", hash = "sha256:ae4377a3e10fe720a9119677b31d8de13e2a5221c06b332df045af002f5f4c3d"},
 ]
 
 [package.dependencies]
-PyQt5 = ">=5.15"
-PyQt5-sip = ">=12.8,<13"
+PySide6-Essentials = "6.8.0.2"
+shiboken6 = "6.8.0.2"
+
+[[package]]
+name = "pyside6-essentials"
+version = "6.8.0.2"
+description = "Python bindings for the Qt cross-platform application and UI framework (Essentials)"
+optional = false
+python-versions = "<3.14,>=3.9"
+files = [
+    {file = "PySide6_Essentials-6.8.0.2-cp39-abi3-macosx_12_0_universal2.whl", hash = "sha256:3df4ed75bbb74d74ac338b330819b1a272e7f5cec206765c7176a197c8bc9c79"},
+    {file = "PySide6_Essentials-6.8.0.2-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:7df6d6c1da4858dbdea77c74d7270d9c68e8d1bbe3362892abd1a5ade3815a50"},
+    {file = "PySide6_Essentials-6.8.0.2-cp39-abi3-manylinux_2_31_aarch64.whl", hash = "sha256:cf490145d18812a6cff48b0b0afb0bfaf7066744bfbd09eb071c3323f1d6d00d"},
+    {file = "PySide6_Essentials-6.8.0.2-cp39-abi3-win_amd64.whl", hash = "sha256:d2f029b8c9f0106f57b26aa8c435435d7f509c80525075343e07177b283f862e"},
+]
+
+[package.dependencies]
+shiboken6 = "6.8.0.2"
 
 [[package]]
 name = "pywin32-ctypes"
@@ -223,25 +209,38 @@ files = [
 
 [[package]]
 name = "setuptools"
-version = "75.3.0"
+version = "75.4.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "setuptools-75.3.0-py3-none-any.whl", hash = "sha256:f2504966861356aa38616760c0f66568e535562374995367b4e69c7143cf6bcd"},
-    {file = "setuptools-75.3.0.tar.gz", hash = "sha256:fba5dd4d766e97be1b1681d98712680ae8f2f26d7881245f2ce9e40714f1a686"},
+    {file = "setuptools-75.4.0-py3-none-any.whl", hash = "sha256:b3c5d862f98500b06ffdf7cc4499b48c46c317d8d56cb30b5c8bce4d88f5c216"},
+    {file = "setuptools-75.4.0.tar.gz", hash = "sha256:1dc484f5cf56fd3fe7216d7b8df820802e7246cfb534a1db2aa64f14fcb9cdcb"},
 ]
 
 [package.extras]
-check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1)", "ruff (>=0.5.2)"]
-core = ["importlib-metadata (>=6)", "importlib-resources (>=5.10.2)", "jaraco.collections", "jaraco.functools", "jaraco.text (>=3.7)", "more-itertools", "more-itertools (>=8.8)", "packaging", "packaging (>=24)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1)", "wheel (>=0.43.0)"]
+check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1)", "ruff (>=0.7.0)"]
+core = ["importlib-metadata (>=6)", "jaraco.collections", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more-itertools", "more-itertools (>=8.8)", "packaging", "packaging (>=24.2)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1)", "wheel (>=0.43.0)"]
 cover = ["pytest-cov"]
 doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
 enabler = ["pytest-enabler (>=2.2)"]
-test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "jaraco.test (>=5.5)", "packaging (>=23.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
-type = ["importlib-metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (==1.12.*)", "pytest-mypy"]
+test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "jaraco.test (>=5.5)", "packaging (>=24.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
+type = ["importlib-metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (>=1.12,<1.14)", "pytest-mypy"]
+
+[[package]]
+name = "shiboken6"
+version = "6.8.0.2"
+description = "Python/C++ bindings helper module"
+optional = false
+python-versions = "<3.14,>=3.9"
+files = [
+    {file = "shiboken6-6.8.0.2-cp39-abi3-macosx_12_0_universal2.whl", hash = "sha256:9019e1fcfeed8bb350222e981748ef05a2fec11e31ddf616657be702f0b7a468"},
+    {file = "shiboken6-6.8.0.2-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:fa7d411c3c67b4296847b3f5f572268e219d947d029ff9d8bce72fe6982d92bc"},
+    {file = "shiboken6-6.8.0.2-cp39-abi3-manylinux_2_31_aarch64.whl", hash = "sha256:1aaa8b7f9138818322ef029b2c487d1c6e00dc3f53084e62e1d11bdea47e47c2"},
+    {file = "shiboken6-6.8.0.2-cp39-abi3-win_amd64.whl", hash = "sha256:b11e750e696bb565d897e0f5836710edfb86bd355f87b09988bd31b2aad404d3"},
+]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "356145596e42d158b958fb49818a0a9a0af653bd07edb4503342217a94b784bc"
+content-hash = "685fba12a8a5fe8895f9496e8c3ffa4942be1a6ba394cd535bc606b9bdc5432b"
