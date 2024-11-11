@@ -48,10 +48,22 @@
   </keywords>
 
   <screenshots>
-    <screenshot url="https://raw.githubusercontent.com/nemuelw/protodesk/d36259d7d87309dbadd7257d5927303b1e2468c6/scrshots/loading.png"/>
-    <screenshot url="https://github.com/nemuelw/Protodesk/blob/main/scrshots/mail.png"/>
-    <screenshot url="https://github.com/nemuelw/Protodesk/blob/main/scrshots/calendar.png"/>
-    <screenshot url="https://github.com/nemuelw/Protodesk/blob/main/scrshots/drive.png"/>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/nemuelw/protodesk/73e45c4ec2b8f64c82fdd35dae90c49ba77e5024/scrshots/mail.png</image>
+      <caption>Proton Mail</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nemuelw/protodesk/73e45c4ec2b8f64c82fdd35dae90c49ba77e5024/scrshots/calendar.png</image>
+      <caption>Proton Calendar</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nemuelw/protodesk/73e45c4ec2b8f64c82fdd35dae90c49ba77e5024/scrshots/drive.png</image>
+      <caption>Proton Drive</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nemuelw/protodesk/73e45c4ec2b8f64c82fdd35dae90c49ba77e5024/scrshots/loading.png</image>
+      <caption>Loading page</caption>
+    </screenshot>
   </screenshots>
 
   <releases>
