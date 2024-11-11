@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "protodesk"
-version = "1.0.0"
+version = "1.1.0"
 description = "Unofficial desktop app for Proton"
 authors = ["Nemuel Wainaina <nemuelwainaina@proton.me>"]
 readme = "README.md"
