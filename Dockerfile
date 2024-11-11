@@ -4,6 +4,9 @@ FROM python:3.12-slim
 # working directory
 WORKDIR /app
 
+# install curl :|
+RUN apt-get update && apt-get install -y curl
+
 # install poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
