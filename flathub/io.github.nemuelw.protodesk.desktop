@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Protodesk
+Comment=Unofficial desktop app for Proton
+Icon=io.github.nemuelw.protodesk
+Exec=protodesk
+Terminal=false
+Categories=Network;Utility;Email;Calendar;Archiving
