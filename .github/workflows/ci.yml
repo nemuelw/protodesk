@@ -48,4 +48,16 @@ jobs:
         - name: Build Docker image
           run: |
             docker build --platform linux/${{ matrix.arch }} -t protodesk .
-            docker rmi protodesk
+
+        - name: Run Docker image
+          run: |
+            docker run --name protodesk-container protodesk
+
+        - name: Copy build from container to host
+          run: |
+            docker cp protodesk-container:/app/dist ./dist
+
+        - name: Create an archive of the build
+          run: |
+            cd dist && tar -czf protodesk.tar.gz app/
+            ls -l 

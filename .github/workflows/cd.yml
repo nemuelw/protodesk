@@ -26,7 +26,11 @@ jobs:
 
           - name: Run Docker image
             run: |
-              docker run --rm -v $(pwd)/dist:/app/dist --name protodesk-container protodesk
+              docker run --name protodesk-container protodesk
+
+          - name: Copy build from container to host
+            run: |
+              docker cp protodesk-container:/app/dist ./dist
 
           - name: Create a versioned archive of the build
             run: |
