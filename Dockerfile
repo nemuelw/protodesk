@@ -4,11 +4,11 @@ FROM python:3.12-slim
 # working directory
 WORKDIR /app
 
-# Install required system dependencies
+# install required system dependencies
 RUN apt-get update && apt-get install -y \
-    binutils \
     curl \
-    gcc
+    gcc \
+    patchelf
 
 # install poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
@@ -19,8 +19,11 @@ COPY . /app
 # add poetry to path
 ENV PATH="/root/.local/bin:$PATH"
 
+# activate poetry environment
+RUN poetry shell
+
 # install project dependencies
 RUN poetry install --no-root
 
-# build the application with Pyinstaller
-RUN poetry run pyinstaller app.spec
+# build the application with Nuitka
+RUN poetry run nuitka --enable-plugin=pyside6 --include-data-dir=./assets=./assets --standalone --lto=yes --output-filename=protodesk app.py

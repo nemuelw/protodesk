@@ -30,11 +30,11 @@ jobs:
 
           - name: Copy build from container to host
             run: |
-              docker cp protodesk-container:/app/dist ./dist
+              docker cp protodesk-container:/app/app.dist ./dist
 
           - name: Create a versioned archive of the build
             run: |
-              cd dist && tar -czf protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz app/
+              tar -czf protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz dist/
 
           - name: Upload release asset
             uses: actions/upload-release-asset@v1
@@ -42,6 +42,6 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               upload_url: ${{ github.event.release.upload_url}}
-              asset_path: dist/protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz
+              asset_path: protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz
               asset_name: protodesk-${{ github.event.release.tag_name }}_${{ matrix.arch }}.tar.gz
               asset_content_type: application/gzip
