@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "protodesk"
-version = "1.2.1"
+version = "1.2.4"
 description = "Unofficial desktop app for Proton"
 authors = ["Nemuel Wainaina <nemuelwainaina@proton.me>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.14"
-pyside6 = "^6.8.0.2"
+pyside6 = {extras = ["all"], version = "^6.8.0.2"}
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.1.1"
