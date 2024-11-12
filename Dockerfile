@@ -24,3 +24,7 @@ RUN poetry install --no-root
 
 # build the application with Pyinstaller
 RUN poetry run pyinstaller app.spec
+
+# confirm that the app is indeed built
+RUN ls -l /app/dist
+RUN ls -l /app/dist/app
