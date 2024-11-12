@@ -18,17 +18,13 @@ jobs:
             with:
               python-version: '3.12'
         
-          - name: Install Poetry
-            run: |
-              curl -sSL https://install.python-poetry.org | python3 -
-        
           - name: Install dependencies
             run: |
-                poetry install
+                pip3 install -r requirements.txt
 
           - name: Run flake8
             run: |
-              poetry run flake8 .
+              flake8 .
 
     multiarch-build:
       runs-on: ubuntu-latest

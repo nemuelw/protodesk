@@ -1,29 +1,22 @@
 # base image
-FROM python:3.12-slim
+FROM python:3.12-bullseye
 
 # working directory
 WORKDIR /app
 
 # install required system dependencies
 RUN apt-get update && apt-get install -y \
-    curl \
     gcc \
     patchelf
-
-# install poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
 
 # copy project files
 COPY . /app
 
-# add poetry to path
-ENV PATH="/root/.local/bin:$PATH"
-
-# activate poetry environment
-RUN poetry shell
+# create and activate a virtual environment
+RUN python -m venv .venv && chmod +x .venv/bin/activate && .venv/bin/activate
 
 # install project dependencies
-RUN poetry install --no-root
+RUN pip3 install -r requirements.txt
 
 # build the application with Nuitka
-RUN poetry run nuitka --enable-plugin=pyside6 --include-data-dir=./assets=./assets --standalone --lto=yes --output-filename=protodesk app.py
+RUN nuitka --enable-plugin=pyside6 --include-data-dir=./assets=./assets --standalone --lto=yes --output-filename=protodesk app.py
