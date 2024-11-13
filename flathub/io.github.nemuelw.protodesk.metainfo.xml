@@ -8,7 +8,7 @@
   <project_license>GPL-3.0-only</project_license>
 
   <name>Protodesk</name>
-  <icon type="stock">io.github.nemuelw.protodesk.png</icon>
+  <icon type="stock">io.github.nemuelw.protodesk.svg</icon>
   <summary>Unofficial desktop app for Proton</summary>
   <description>
     <p>
