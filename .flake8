@@ -3,3 +3,5 @@ max-line-length = 110
 exclude = 
     .venv/*
     app.build/*
+    app.dist/*
+    app.onefile-build/*
