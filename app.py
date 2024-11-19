@@ -4,7 +4,7 @@ import webbrowser
 
 from PySide6.QtCore import Slot, QSize, QUrl, Qt, QTimer
 from PySide6.QtGui import QIcon, QGuiApplication
-from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineDownloadRequest
+from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineDownloadRequest, QWebEngineProfile
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (QApplication, QDialog, QFileDialog, QHBoxLayout, QLabel, QMainWindow,
                                QPushButton, QSizePolicy, QSystemTrayIcon, QVBoxLayout, QWidget)
@@ -31,8 +31,8 @@ class TempPage(QWebEnginePage):
     """
     Temporary page to facilitate capturing the URLs of any clicked links
     """
-    def __init__(self, webview, parent=None):
-        super().__init__(parent)
+    def __init__(self, webview, profile, parent=None):
+        super().__init__(profile, parent)
         self.web = webview
         self.urlChanged.connect(self.handle_url_changed)
         self.allowlist = [
@@ -51,20 +51,20 @@ class ProtonWebPage(QWebEnginePage):
     """
     Custom web page for loading Proton services
     """
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, profile, parent=None):
+        super().__init__(profile, parent)
 
     def createWindow(self, _):
-        return TempPage(self, self.view())
+        return TempPage(self.parent(), self.profile(), self)
 
 
 class ProtonWebView(QWebEngineView):
     """
     Custom QWebEngineView for Protodesk
     """
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setPage(ProtonWebPage(self))
+    def __init__(self, profile, parent=None):
+        super().__init__(profile, parent)
+        self.setPage(ProtonWebPage(profile, self))
         profile = self.page().profile()
         profile.downloadRequested.connect(self.handle_download)
 
@@ -283,8 +283,11 @@ class ProtonDesktopApp(QMainWindow):
 
         self.main_layout.addWidget(self.sidebar, alignment=Qt.AlignLeft)
 
+        # enable on-disk persistence for session data
+        profile = QWebEngineProfile('protodesk')
+
         # webview
-        self.web = ProtonWebView(self)
+        self.web = ProtonWebView(profile, self)
         self.main_layout.addWidget(self.web)
 
         self.main_layout.setStretchFactor(self.web, 1)
