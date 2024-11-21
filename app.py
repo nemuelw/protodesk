@@ -21,7 +21,7 @@ def show_notification(title, msg):
     """
     Show custom notification in the system tray
     """
-    tray_icon = QSystemTrayIcon(QIcon(asset_path('logo.ico')), parent=app)
+    tray_icon = QSystemTrayIcon(QIcon(asset_path('logo.png')), parent=app)
     tray_icon.show()
     tray_icon.showMessage(
         title, "Your file has been successfully downloaded.", QSystemTrayIcon.Information, 5000)
@@ -338,7 +338,7 @@ class ProtonDesktopApp(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon(asset_path('logo.ico')))
+    app.setWindowIcon(QIcon(asset_path('logo.png')))
     window = ProtonDesktopApp()
     window.show()
     sys.exit(app.exec())
