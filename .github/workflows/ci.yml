@@ -20,65 +20,58 @@ jobs:
         
           - name: Install dependencies
             run: |
-                pip3 install flake8
+                pip install flake8
 
           - name: Run flake8
             run: |
               flake8 .
 
-    multiarch-build:
+    build:
       runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          arch: [amd64, arm64]
       steps:
+        - name: Install dependencies
+          run: |
+            sudo apt-get install -y desktop-file-utils
+
         - name: Checkout repository
           uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
 
-        - name: Set up QEMU
-          uses: docker/setup-qemu-action@v3
-
-        - name: Set up Docker Buildx
-          uses: docker/setup-buildx-action@v2
-
-        - name: Build Docker image
+        - name: Set clean version variable
           run: |
-            docker build --platform linux/${{ matrix.arch }} -t protodesk .
+            VERSION=${{ github.event.release.tag_name }}
+            APP_VERSION=${VERSION#v}
+            echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
+            echo $APP_VERSION
 
-        - name: Run Docker image
+        - name: Set up python
+          uses: actions/setup-python@v4
+          with:
+            python-version: '3.12'
+      
+        - name: Install project dependencies
           run: |
-            docker run --name protodesk-container protodesk
+              pip install -r requirements.txt
 
-        - name: Copy build from container to host
+        - name: Build the app with Nuitka
           run: |
-            docker cp protodesk-container:/app/protodesk .
+            nuitka --enable-plugin=pyside6 --include-data-dir=./assets=./assets --standalone --onefile --lto=yes --output-filename=protodesk app.py
 
-        - name: Prepare AppImage directory
+        - name: Prepare AppImage contents
           run: |
             mkdir -p app.AppDir/usr/bin
-            cp ./protodesk app.AppDir/usr/bin/
-            cp ./assets/logo.png app.AppDir/protodesk.png
+            cp protodesk app.AppDir/usr/bin/
+            cp assets/logo.png app.AppDir/protodesk.png
 
-        - name: Download AppImageTool for amd64
-          if: matrix.arch == 'amd64'
+        - name: Set up appimagetool
           run: |
             wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
             chmod +x appimagetool
 
-        - name: Download AppImageTool for aarch64
-          if: matrix.arch == 'arm64'
+        - name: Build the AppImage
           run: |
-            wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-aarch64.AppImage -O appimagetool
-            chmod +x appimagetool
-
-        - name: Install the desktop-file-utils dependency
-          run: |
-            sudo apt-get update && sudo apt-get install -y desktop-file-utils
-
-        - name: Build AppImage for amd64
-          run: |
-            ./appimagetool app.AppDir Protodesk-${{ matrix.arch }}.AppImage
-            echo "[+] Build successful on ${{ matrix.arch }}"
+            ./appimagetool app.AppDir Protodesk-${APP_VERSION}-x86_64.AppImage
 
         # - name: Upload release asset
         #   uses: actions/upload-release-asset@v1
@@ -86,6 +79,6 @@ jobs:
         #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #   with:
         #     upload_url: ${{ github.event.release.upload_url}}
-        #     asset_path: Protodesk-${{ matrix.arch }}.AppImage
-        #     asset_name: Protodesk-${{ matrix.arch }}.AppImage
+        #     asset_path: Protodesk-${{ env.APP_VERSION }}-${{ matrix.arch }}.AppImage
+        #     asset_name: Protodesk-${{ env.APP_VERSION }}-${{ matrix.arch }}.AppImage
         #     asset_content_type: application/octet-stream
