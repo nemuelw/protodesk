@@ -23,10 +23,16 @@ service and only fully available to premium users beyond the 14-day trial period
 - access the 3 core Proton services (Mail, Calendar, and Drive) without having to visit the websites on
   their browsers.
 
-## Distribution
+## Download
 
-Notably, **Protodesk** is only available for Linux distributions, and there are *currently* no plans
-to make it available for other platforms.
+Notably, **Protodesk** is only available for Linux distributions as an AppImage, and there are *currently*
+no plans to make it available for other platforms.
+
+<p align="center">
+  <a href="https://github.com/nemuelw/protodesk/releases/download/v1.3.0/Protodesk-1.3.0-x86_64.AppImage">
+    <img src="./assets/download.png" alt="Download AppImage" height="75"/>
+  </a>
+</p>
 
 ## Contributions
 
@@ -55,5 +61,5 @@ and maintenance, you are welcome to do so using any of these channels:
 
 ## Developers & Maintainers
 
-Nemuel Wainaina
+- Nemuel Wainaina
   - **Email**: [nemuelwainaina@proton.me](mailto:nemuelwainaina@proton.me)
