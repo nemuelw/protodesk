@@ -44,3 +44,48 @@ jobs:
         - name: Build Docker image
           run: |
             docker build --platform linux/${{ matrix.arch }} -t protodesk .
+
+        - name: Run Docker image
+          run: |
+            docker run --name protodesk-container protodesk
+
+        - name: Copy build from container to host
+          run: |
+            docker cp protodesk-container:/app/protodesk .
+
+        - name: Prepare AppImage directory
+          run: |
+            mkdir -p app.AppDir/usr/bin
+            cp ./protodesk app.AppDir/usr/bin/
+            cp ./assets/logo.png app.AppDir/protodesk.png
+
+        - name: Download AppImageTool for amd64
+          if: matrix.arch == 'amd64'
+          run: |
+            wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
+            chmod +x appimagetool
+
+        - name: Download AppImageTool for aarch64
+          if: matrix.arch == 'arm64'
+          run: |
+            wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-aarch64.AppImage -O appimagetool
+            chmod +x appimagetool
+
+        - name: Install the desktop-file-utils dependency
+          run: |
+            sudo apt-get update && sudo apt-get install -y desktop-file-utils
+
+        - name: Build AppImage for amd64
+          run: |
+            ./appimagetool app.AppDir Protodesk-${{ matrix.arch }}.AppImage
+            echo "[+] Build successful on ${{ matrix.arch }}"
+
+        # - name: Upload release asset
+        #   uses: actions/upload-release-asset@v1
+        #   env:
+        #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   with:
+        #     upload_url: ${{ github.event.release.upload_url}}
+        #     asset_path: Protodesk-${{ matrix.arch }}.AppImage
+        #     asset_name: Protodesk-${{ matrix.arch }}.AppImage
+        #     asset_content_type: application/octet-stream
