@@ -2,7 +2,7 @@
 Type=Application
 Name=Protodesk
 Comment=Unofficial desktop app for Proton
-Icon=io.github.nemuelw.protodesk
+Icon=protodesk
 Exec=protodesk
 Terminal=false
 Categories=Network;Utility;Email;Calendar;Archiving

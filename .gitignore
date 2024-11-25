@@ -5,3 +5,5 @@ app.build/
 app.dist/
 app.onefile-build/
 protodesk
+.DirIcon
+*.AppImage
