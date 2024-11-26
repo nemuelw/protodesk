@@ -61,5 +61,4 @@ and maintenance, you are welcome to do so using any of these channels:
 
 ## Developers & Maintainers
 
-- Nemuel Wainaina
-  - **Email**: [nemuelwainaina@proton.me](mailto:nemuelwainaina@proton.me)
+Nemuel Wainaina - [nemuelwainaina@proton.me](mailto:nemuelwainaina@proton.me)
