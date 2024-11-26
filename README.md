@@ -23,6 +23,20 @@ service and only fully available to premium users beyond the 14-day trial period
 - access the 3 core Proton services (Mail, Calendar, and Drive) without having to visit the websites on
   their browsers.
 
+## Features
+
+- **Easy to set up** - The app is packaged and distributed as an AppImage, and all the user has to do is
+  [download](https://github.com/nemuelw/protodesk#download) the AppImage, make it executable, and start using Protodesk.
+- **Session persistence** - Session data is persisted on disk, meaning the user does not have to log in
+  again every other time they want to use the application.
+- **File downloads** - Easily download email attachments and files in Proton Drive onto your local storage.
+- **Proton Mail integration** - Easy access to Proton Mail for reading, sending, and organizing emails.
+- **Proton Calendar support** - Manage your calendar with the included Proton Calendar access.
+- **Proton Drive integration** - Store, organize, and share your files via Proton Drive reliably.
+- **Opening external links** - External links are opened in the user's default browser application.
+- **Open-source** - The project's source code is freely avaiable for all and sundry to inspect and 
+  contribute to.
+
 ## Download
 
 Notably, **Protodesk** is only available for Linux distributions as an AppImage, and there are *currently*
