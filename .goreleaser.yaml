@@ -1,0 +1,51 @@
+project_name: protodesk
+
+# Build configuration
+builds:
+  - id: protodesk_build
+    main: ./app.py
+    binary: protodesk
+    goos:
+      - windows
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+
+# Archives (e.g., zip or tar.gz packages)
+archives:
+  - format: zip
+    files:
+      - LICENSE
+      - README.md
+
+# Release information
+release:
+  github:
+    owner: ######
+    name: protodesk
+
+# Artifact customization
+checksum:
+  name_template: '{{ .ProjectName }}_checksums.txt'
+
+# Windows installer (optional, using external tools)
+dockers:
+  - image_templates:
+      - '######/{{ .ProjectName }}:{{ .Version }}'
+
+# Snapcraft for Linux
+snapcraft:
+  name: protodesk
+  summary: 'A simple tool for prototyping desktop applications.'
+  description: |
+    Longer description of Protodesk.
+
+# Custom build hooks
+before:
+  hooks:
+    - go mod tidy
+after:
+  hooks:
+    - echo "Build completed!"
